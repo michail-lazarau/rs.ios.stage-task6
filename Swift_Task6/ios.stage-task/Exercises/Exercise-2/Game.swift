@@ -16,8 +16,34 @@ struct Game: GameCompatible {
 }
 
 extension Game {
-
     func defineFirstAttackingPlayer(players: [Player]) -> Player? {
-        nil
+//        players.filter { player in
+//            player.hand?.contains(where: { card in
+//                card.isTrump && card.value.rawValue.
+//            })
+//        }
+
+        players.filter { $0.hand!.contains(where: { card in
+            card.isTrump
+        }) }
+            .min { playerA, playerB in
+                playerA.hand!.filter{$0.isTrump}.min()! < playerB.hand!.filter{$0.isTrump}.min()!
+            }
+
+        
+//        .min { playerA, playerB in
+//            playerA.hand!.filter{$0.isTrump}.min(by: { cardA, CardB in
+//                cardA.rawValue < CardB.rawValue
+//            })! < playerB.hand!.filter{$0.isTrump}.min(by: { cardA, CardB in
+//                cardA.rawValue < CardB.rawValue
+//            })!
+//        }
+        
+        
+//        for player in players {
+//            player.hand?.min(by: { cardA, CardB in
+//                cardA.rawValue < CardB.rawValue
+//            })
+//        }
     }
 }
